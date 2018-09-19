@@ -32,8 +32,10 @@ class App extends Component {
       firstFloorCeilingFanCount: false,
       firstFloorDedicated: false,
       firstFloorSmoke: false,
-      firstFloorCo: false,
+      firstFloorSmokeCount: 0,
+      firstFloorCO: false,
       firstFloorOther: false,
+      firstFloorOtherText: false,
       firstFloorRec: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -314,6 +316,58 @@ class App extends Component {
                     onChange={(event) => this.setState({ firstFloorCeilingFanCount: event.target.value })}
                   />
                 </p>
+                <p>
+                  <input
+                    name="firstFloorDedicated"
+                    type="checkbox"
+                    value={this.state.firstFloorDedicated}
+                    onChange={this.handleInputChange}
+                  />
+                  <label>Dedicated Circuits?</label>
+
+                </p>
+                <p>
+                  <input
+                    name="firstFloorSmoke"
+                    type="checkbox"
+                    value={this.state.firstFloorSmoke}
+                    onChange={this.handleInputChange}
+                  /><label>Smoke Detectors</label>
+                  <input
+                    name="firstFloorSmokeCount"
+                    type="number"
+                    value={this.state.firstFloorSmokeCount}
+                    onChange={(event) => this.setState({ firstFloorSmokeCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="firstFloorCO"
+                    type="checkbox"
+                    value={this.state.firstFloorCO}
+                    onChange={this.handleInputChange}
+                  /><label>CO Detectors?</label>
+                  <input
+                    name="firstFloorCOCount"
+                    type="number"
+                    value={this.state.firstFloorCOCount}
+                    onChange={(event) => this.setState({ firstFloorCOCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="firstFloorOther"
+                    type="checkbox"
+                    value={this.state.firstFloorOther}
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    name="firstFloorOtherText"
+                    type="text"
+                    value={this.state.firstFloorOtherText}
+                    onChange={(event) => this.setState({ firstFloorOtherText: event.target.value })}
+                  />
+                </p>
               </div>
               <div id="secondFloor"></div>
               <div id="thirdFloor"></div>
@@ -351,6 +405,10 @@ class App extends Component {
             {this.state.firstFloorSurfaceLight ? <li>Supply and install {this.state.firstFloorSurfaceLightCount} surface mount light{this.state.firstFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
             {this.state.firstFloorBathFan ? <li>Install power for {this.state.firstFloorBathFanCount} bathroom exhaust fan{this.state.firstFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
             {this.state.firstFloorCeilingFan ? <li>Install power for {this.state.firstFloorCeilingFanCount} ceiling fan{this.state.firstFloorCeilingFanCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.firstFloorDedicated ? <li>Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </li> : ''}
+            {this.state.firstFloorSmoke ? <li>Supply and install {this.state.firstFloorSmokeCount} smoke detector{this.state.firstFloorSmokeCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.firstFloorCO ? <li>Supply and install {this.state.firstFloorCOCount} CO detector{this.state.firstFloorCOCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.firstFloorOther ? <li>{this.state.firstFloorOtherText}</li> : ''}
           </ul>
         </div>
       </div>
