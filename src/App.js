@@ -24,8 +24,12 @@ class App extends Component {
       firstFloorRewiring: 'entire floor',
       firstFloorRL: false,
       firstFloorRLCount: false,
+      firstFloorSurfaceLight: false,
+      firstFloorSurfaceLightCount: 0,
       firstFloorBathFan: false,
+      firstFloorBathFanCount: false,
       firstFloorCeilingFan: false,
+      firstFloorCeilingFanCount: false,
       firstFloorDedicated: false,
       firstFloorSmoke: false,
       firstFloorCo: false,
@@ -241,6 +245,21 @@ class App extends Component {
                 </p>
                 <p>
                   <input
+                    name="firstFloorRewire"
+                    type="checkbox"
+                    value={this.state.firstFloorRewire}
+                    onChange={this.handleInputChange}
+                  /><label>Rewire</label>
+                  <input
+                    name="firstFloorRewiring"
+                    type="text"
+                    placeholder="entire floor"
+                    value={this.state.firstFloorRewiring}
+                    onChange={(event) => this.setState({ firstFloorRewiring: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
                     name="firstFloorRL"
                     type="checkbox"
                     value={this.state.firstFloorRL}
@@ -255,17 +274,44 @@ class App extends Component {
                 </p>
                 <p>
                   <input
-                    name="firstFloorRewire"
+                    name="firstFloorSurfaceLight"
                     type="checkbox"
-                    value={this.state.firstFloorRewire}
+                    value={this.state.firstFloorSurfaceLight}
                     onChange={this.handleInputChange}
-                  /><label>Rewire</label>
+                  /><label>Surface Mount Lighting?</label>
                   <input
-                    name="firstFloorRewiring"
-                    type="text"
-                    placeholder="entire floor"
-                    value={this.state.firstFloorRewiring}
-                    onChange={(event) => this.setState({ firstFloorRewiring: event.target.value })}
+                    name="firstFloorSurfaceLightAmount"
+                    type="number"
+                    value={this.state.firstFloorSurfaceLightCount}
+                    onChange={(event) => this.setState({ firstFloorSurfaceLightCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="firstFloorBathFan"
+                    type="checkbox"
+                    value={this.state.firstFloorBathFan}
+                    onChange={this.handleInputChange}
+                  /><label>Bath Fans?</label>
+                  <input
+                    name="firstFloorBathFanCount"
+                    type="number"
+                    value={this.state.firstFloorBathFanCount}
+                    onChange={(event) => this.setState({ firstFloorBathFanCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="firstFloorCeilingFan"
+                    type="checkbox"
+                    value={this.state.firstFloorCeilingFan}
+                    onChange={this.handleInputChange}
+                  /><label>Ceiling Fans?</label>
+                  <input
+                    name="firstFloorCeilingFanCount"
+                    type="number"
+                    value={this.state.firstFloorCeilingFanCount}
+                    onChange={(event) => this.setState({ firstFloorCeilingFanCount: event.target.value })}
                   />
                 </p>
               </div>
@@ -278,9 +324,9 @@ class App extends Component {
 
         <div className="output">
           <hr />
-          <p class="title">Scope of Work</p>
+          <p className="title">Scope of Work</p>
           {/*Begin Basement*/}
-          <p class="title is-4">{this.state.basement}</p>
+          <p className="title is-4">{this.state.basement}</p>
           <ul>
             {this.state.service ? <li>{this.state.service}</li> : ''}
             {this.state.meter ? <li>{this.state.meter}</li> : ''}
@@ -298,10 +344,13 @@ class App extends Component {
           {/*End Basement*/}
 
           {/*Begin First Floor*/}
-          <p class="title is-4">{this.state.firstFloor}</p>
+          <p className="title is-4">{this.state.firstFloor}</p>
           <ul>
-            {this.state.firstFloorRL ? <li>Supply and install {this.state.firstFloorRLCount} recessed light{this.state.firstFloorRLCount > 1 ? 's' : ''}</li> : ''}
             {this.state.firstFloorRewire ? <li>Rewire {this.state.firstFloorRewiring}: standard white switches and plugs. </li> : ''}
+            {this.state.firstFloorRL ? <li>Supply and install {this.state.firstFloorRLCount} recessed light{this.state.firstFloorRLCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.firstFloorSurfaceLight ? <li>Supply and install {this.state.firstFloorSurfaceLightCount} surface mount light{this.state.firstFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.firstFloorBathFan ? <li>Install power for {this.state.firstFloorBathFanCount} bathroom exhaust fan{this.state.firstFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.firstFloorCeilingFan ? <li>Install power for {this.state.firstFloorCeilingFanCount} ceiling fan{this.state.firstFloorCeilingFanCount > 1 ? 's' : ''}</li> : ''}
           </ul>
         </div>
       </div>
