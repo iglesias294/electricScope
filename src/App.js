@@ -36,7 +36,43 @@ class App extends Component {
       firstFloorCO: false,
       firstFloorOther: false,
       firstFloorOtherText: false,
-      firstFloorRec: ''
+      firstFloorRec: '',
+      secondFloor: '',
+      secondFloorRewire: false,
+      secondFloorRewiring: 'entire floor',
+      secondFloorRL: false,
+      secondFloorRLCount: false,
+      secondFloorSurfaceLight: false,
+      secondFloorSurfaceLightCount: 0,
+      secondFloorBathFan: false,
+      secondFloorBathFanCount: false,
+      secondFloorCeilingFan: false,
+      secondFloorCeilingFanCount: false,
+      secondFloorDedicated: false,
+      secondFloorSmoke: false,
+      secondFloorSmokeCount: 0,
+      secondFloorCO: false,
+      secondFloorOther: false,
+      secondFloorOtherText: false,
+      secondFloorRec: '',
+      thirdFloor: '',
+      thirdFloorRewire: false,
+      thirdFloorRewiring: 'entire floor',
+      thirdFloorRL: false,
+      thirdFloorRLCount: false,
+      thirdFloorSurfaceLight: false,
+      thirdFloorSurfaceLightCount: 0,
+      thirdFloorBathFan: false,
+      thirdFloorBathFanCount: false,
+      thirdFloorCeilingFan: false,
+      thirdFloorCeilingFanCount: false,
+      thirdFloorDedicated: false,
+      thirdFloorSmoke: false,
+      thirdFloorSmokeCount: 0,
+      thirdFloorCO: false,
+      thirdFloorOther: false,
+      thirdFloorOtherText: false,
+      thirdFloorRec: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -60,15 +96,19 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Electrical Scope of Work Generator</h1>
-        </header>
+
         <div className="OuterContainer">
-          <img style={{ display: 'inline-block' }} src={townhouse} alt="townhouse" />
+          <div style={{ textAlign: 'center' }}>
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <h1 className="App-title">Electrical Scope of Work Generator</h1>
+            </header>
+            <img src={townhouse} alt="townhouse" />
+          </div>
+
           <form style={{ display: 'inline-block' }}>
             <div className="FormContainer">
-              <div id="basementSection">
+              <div id="basementSection" className="notification">
                 <p class="title">
                   <input
                     name="basement"
@@ -113,6 +153,8 @@ class App extends Component {
                   <input
                     name="rewire2"
                     type="text"
+                    className="input"
+                    className="input"
                     placeholder="entire floor"
                     value={this.state.rewire2}
                     onChange={(event) => this.setState({ rewire2: event.target.value })}
@@ -128,7 +170,7 @@ class App extends Component {
                   /><label>Recessed lights?</label>
                   <input
                     name="basementRec"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.basementRec}
                     onChange={(event) => this.setState({ basementRec: event.target.value })}
                   />
@@ -143,7 +185,7 @@ class App extends Component {
                   /><label>Surface Mount Lighting?</label>
                   <input
                     name="basementLight2"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.basementLight2}
                     onChange={(event) => this.setState({ basementLight2: event.target.value })}
                   />
@@ -158,7 +200,7 @@ class App extends Component {
                   /><label>Bath Fans?</label>
                   <input
                     name="basementBathFan2"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.basementBathFan2}
                     onChange={(event) => this.setState({ basementBathFan2: event.target.value })}
                   />
@@ -173,7 +215,7 @@ class App extends Component {
                   /><label>Ceiling Fans?</label>
                   <input
                     name="basementCeilingFan2"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.basementCeilingFan2}
                     onChange={(event) => this.setState({ basementCeilingFan2: event.target.value })}
                   />
@@ -199,7 +241,7 @@ class App extends Component {
                   /><label>Smoke Detectors</label>
                   <input
                     name="basementSmoke2"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.basementSmoke2}
                     onChange={(event) => this.setState({ basementSmoke2: event.target.value })}
                   />
@@ -214,7 +256,7 @@ class App extends Component {
                   /><label>CO Detectors</label>
                   <input
                     name="basementSmoke2"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.basementCo2}
                     onChange={(event) => this.setState({ basementCo2: event.target.value })}
                   />
@@ -230,12 +272,14 @@ class App extends Component {
                   <input
                     name="basementOther2"
                     type="text"
+                    className="input"
+                    className="input"
                     value={this.state.basementOther2}
                     onChange={(event) => this.setState({ basementOther2: event.target.value })}
                   />
                 </p>
               </div> {/* // basement section */}
-              <div id="firstFloor">
+              <div id="firstFloor" className="notification is-dark">
                 <p class="title">
                   <input
                     name="firstFloor"
@@ -255,6 +299,8 @@ class App extends Component {
                   <input
                     name="firstFloorRewiring"
                     type="text"
+                    className="input"
+                    className="input"
                     placeholder="entire floor"
                     value={this.state.firstFloorRewiring}
                     onChange={(event) => this.setState({ firstFloorRewiring: event.target.value })}
@@ -269,7 +315,7 @@ class App extends Component {
                   /><label>Recessed lights?</label>
                   <input
                     name="firstFloorRLCount"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.firstFloorRLCount}
                     onChange={(event) => this.setState({ firstFloorRLCount: event.target.value })}
                   />
@@ -283,7 +329,7 @@ class App extends Component {
                   /><label>Surface Mount Lighting?</label>
                   <input
                     name="firstFloorSurfaceLightAmount"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.firstFloorSurfaceLightCount}
                     onChange={(event) => this.setState({ firstFloorSurfaceLightCount: event.target.value })}
                   />
@@ -297,7 +343,7 @@ class App extends Component {
                   /><label>Bath Fans?</label>
                   <input
                     name="firstFloorBathFanCount"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.firstFloorBathFanCount}
                     onChange={(event) => this.setState({ firstFloorBathFanCount: event.target.value })}
                   />
@@ -311,7 +357,7 @@ class App extends Component {
                   /><label>Ceiling Fans?</label>
                   <input
                     name="firstFloorCeilingFanCount"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.firstFloorCeilingFanCount}
                     onChange={(event) => this.setState({ firstFloorCeilingFanCount: event.target.value })}
                   />
@@ -335,7 +381,7 @@ class App extends Component {
                   /><label>Smoke Detectors</label>
                   <input
                     name="firstFloorSmokeCount"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.firstFloorSmokeCount}
                     onChange={(event) => this.setState({ firstFloorSmokeCount: event.target.value })}
                   />
@@ -349,7 +395,7 @@ class App extends Component {
                   /><label>CO Detectors?</label>
                   <input
                     name="firstFloorCOCount"
-                    type="number"
+                    type="number" className="input"
                     value={this.state.firstFloorCOCount}
                     onChange={(event) => this.setState({ firstFloorCOCount: event.target.value })}
                   />
@@ -364,15 +410,286 @@ class App extends Component {
                   <input
                     name="firstFloorOtherText"
                     type="text"
+                    className="input"
                     value={this.state.firstFloorOtherText}
                     onChange={(event) => this.setState({ firstFloorOtherText: event.target.value })}
                   />
                 </p>
-              </div>
-              <div id="secondFloor"></div>
-              <div id="thirdFloor"></div>
+              </div> {/* END FIRST FLOOR */}
+              <div id="secondFloor" className="notification is-gray">
+                <p class="title">
+                  <input
+                    name="secondFloor"
+                    type="checkbox"
+                    value="Second Floor"
+                    onChange={this.handleInputChange}
+                  />
+                  <label>Second Floor</label>
+                </p>
+                <p>
+                  <input
+                    name="secondFloorRewire"
+                    type="checkbox"
+                    value={this.state.secondFloorRewire}
+                    onChange={this.handleInputChange}
+                  /><label>Rewire</label>
+                  <input
+                    name="secondFloorRewiring"
+                    type="text"
+                    className="input"
+                    placeholder="entire floor"
+                    value={this.state.secondFloorRewiring}
+                    onChange={(event) => this.setState({ secondFloorRewiring: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="secondFloorRL"
+                    type="checkbox"
+                    value={this.state.secondFloorRL}
+                    onChange={this.handleInputChange}
+                  /><label>Recessed lights?</label>
+                  <input
+                    name="secondFloorRLCount"
+                    type="number" className="input"
+                    value={this.state.secondFloorRLCount}
+                    onChange={(event) => this.setState({ secondFloorRLCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="secondFloorSurfaceLight"
+                    type="checkbox"
+                    value={this.state.secondFloorSurfaceLight}
+                    onChange={this.handleInputChange}
+                  /><label>Surface Mount Lighting?</label>
+                  <input
+                    name="secondFloorSurfaceLightAmount"
+                    type="number" className="input"
+                    value={this.state.secondFloorSurfaceLightCount}
+                    onChange={(event) => this.setState({ secondFloorSurfaceLightCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="secondFloorBathFan"
+                    type="checkbox"
+                    value={this.state.secondFloorBathFan}
+                    onChange={this.handleInputChange}
+                  /><label>Bath Fans?</label>
+                  <input
+                    name="secondFloorBathFanCount"
+                    type="number" className="input"
+                    value={this.state.secondFloorBathFanCount}
+                    onChange={(event) => this.setState({ secondFloorBathFanCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="secondFloorCeilingFan"
+                    type="checkbox"
+                    value={this.state.secondFloorCeilingFan}
+                    onChange={this.handleInputChange}
+                  /><label>Ceiling Fans?</label>
+                  <input
+                    name="secondFloorCeilingFanCount"
+                    type="number" className="input"
+                    value={this.state.secondFloorCeilingFanCount}
+                    onChange={(event) => this.setState({ secondFloorCeilingFanCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="secondFloorDedicated"
+                    type="checkbox"
+                    value={this.state.secondFloorDedicated}
+                    onChange={this.handleInputChange}
+                  />
+                  <label>Dedicated Circuits?</label>
 
-            </div>
+                </p>
+                <p>
+                  <input
+                    name="secondFloorSmoke"
+                    type="checkbox"
+                    value={this.state.secondFloorSmoke}
+                    onChange={this.handleInputChange}
+                  /><label>Smoke Detectors</label>
+                  <input
+                    name="secondFloorSmokeCount"
+                    type="number" className="input"
+                    value={this.state.secondFloorSmokeCount}
+                    onChange={(event) => this.setState({ secondFloorSmokeCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="secondFloorCO"
+                    type="checkbox"
+                    value={this.state.secondFloorCO}
+                    onChange={this.handleInputChange}
+                  /><label>CO Detectors?</label>
+                  <input
+                    name="secondFloorCOCount"
+                    type="number" className="input"
+                    value={this.state.secondFloorCOCount}
+                    onChange={(event) => this.setState({ secondFloorCOCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="secondFloorOther"
+                    type="checkbox"
+                    value={this.state.secondFloorOther}
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    name="secondFloorOtherText"
+                    type="text"
+                    className="input"
+                    value={this.state.secondFloorOtherText}
+                    onChange={(event) => this.setState({ secondFloorOtherText: event.target.value })}
+                  />
+                </p>
+              </div> {/*END SECOND FLOOR*/}
+              <div id="thirdFloor" className="notification is-dark" style={{ marginBottom: '1.5rem' }}>
+                <p class="title">
+                  <input
+                    name="thirdFloor"
+                    type="checkbox"
+                    value="Third Floor"
+                    onChange={this.handleInputChange}
+                  />
+                  <label>Third Floor</label>
+                </p>
+                <p>
+                  <input
+                    name="thirdFloorRewire"
+                    type="checkbox"
+                    value={this.state.thirdFloorRewire}
+                    onChange={this.handleInputChange}
+                  /><label>Rewire</label>
+                  <input
+                    name="thirdFloorRewiring"
+                    type="text"
+                    className="input"
+                    placeholder="entire floor"
+                    value={this.state.thirdFloorRewiring}
+                    onChange={(event) => this.setState({ thirdFloorRewiring: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="thirdFloorRL"
+                    type="checkbox"
+                    value={this.state.thirdFloorRL}
+                    onChange={this.handleInputChange}
+                  /><label>Recessed lights?</label>
+                  <input
+                    name="thirdFloorRLCount"
+                    type="number" className="input"
+                    value={this.state.thirdFloorRLCount}
+                    onChange={(event) => this.setState({ thirdFloorRLCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="thirdFloorSurfaceLight"
+                    type="checkbox"
+                    value={this.state.thirdFloorSurfaceLight}
+                    onChange={this.handleInputChange}
+                  /><label>Surface Mount Lighting?</label>
+                  <input
+                    name="thirdFloorSurfaceLightAmount"
+                    type="number" className="input"
+                    value={this.state.thirdFloorSurfaceLightCount}
+                    onChange={(event) => this.setState({ thirdFloorSurfaceLightCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="thirdFloorBathFan"
+                    type="checkbox"
+                    value={this.state.thirdFloorBathFan}
+                    onChange={this.handleInputChange}
+                  /><label>Bath Fans?</label>
+                  <input
+                    name="thirdFloorBathFanCount"
+                    type="number" className="input"
+                    value={this.state.thirdFloorBathFanCount}
+                    onChange={(event) => this.setState({ thirdFloorBathFanCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="thirdFloorCeilingFan"
+                    type="checkbox"
+                    value={this.state.thirdFloorCeilingFan}
+                    onChange={this.handleInputChange}
+                  /><label>Ceiling Fans?</label>
+                  <input
+                    name="thirdFloorCeilingFanCount"
+                    type="number" className="input"
+                    value={this.state.thirdFloorCeilingFanCount}
+                    onChange={(event) => this.setState({ thirdFloorCeilingFanCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="thirdFloorDedicated"
+                    type="checkbox"
+                    value={this.state.thirdFloorDedicated}
+                    onChange={this.handleInputChange}
+                  />
+                  <label>Dedicated Circuits?</label>
+
+                </p>
+                <p>
+                  <input
+                    name="thirdFloorSmoke"
+                    type="checkbox"
+                    value={this.state.thirdFloorSmoke}
+                    onChange={this.handleInputChange}
+                  /><label>Smoke Detectors</label>
+                  <input
+                    name="thirdFloorSmokeCount"
+                    type="number" className="input"
+                    value={this.state.thirdFloorSmokeCount}
+                    onChange={(event) => this.setState({ thirdFloorSmokeCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="thirdFloorCO"
+                    type="checkbox"
+                    value={this.state.thirdFloorCO}
+                    onChange={this.handleInputChange}
+                  /><label>CO Detectors?</label>
+                  <input
+                    name="thirdFloorCOCount"
+                    type="number" className="input"
+                    value={this.state.thirdFloorCOCount}
+                    onChange={(event) => this.setState({ thirdFloorCOCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="thirdFloorOther"
+                    type="checkbox"
+                    value={this.state.thirdFloorOther}
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    name="thirdFloorOtherText"
+                    type="text"
+                    className="input"
+                    value={this.state.thirdFloorOtherText}
+                    onChange={(event) => this.setState({ thirdFloorOtherText: event.target.value })}
+                  />
+                </p>
+              </div>
+
+            </div> {/*END THIRD FLOOR*/}
           </form>
         </div>
 
@@ -409,6 +726,32 @@ class App extends Component {
             {this.state.firstFloorSmoke ? <li>Supply and install {this.state.firstFloorSmokeCount} smoke detector{this.state.firstFloorSmokeCount > 1 ? 's' : ''}</li> : ''}
             {this.state.firstFloorCO ? <li>Supply and install {this.state.firstFloorCOCount} CO detector{this.state.firstFloorCOCount > 1 ? 's' : ''}</li> : ''}
             {this.state.firstFloorOther ? <li>{this.state.firstFloorOtherText}</li> : ''}
+          </ul>
+          {/*End First Floor*/}
+          <p className="title is-4">{this.state.secondFloor}</p>
+          <ul>
+            {this.state.secondFloorRewire ? <li>Rewire {this.state.secondFloorRewiring}: standard white switches and plugs. </li> : ''}
+            {this.state.secondFloorRL ? <li>Supply and install {this.state.secondFloorRLCount} recessed light{this.state.secondFloorRLCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.secondFloorSurfaceLight ? <li>Supply and install {this.state.secondFloorSurfaceLightCount} surface mount light{this.state.secondFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.secondFloorBathFan ? <li>Install power for {this.state.secondFloorBathFanCount} bathroom exhaust fan{this.state.secondFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.secondFloorCeilingFan ? <li>Install power for {this.state.secondFloorCeilingFanCount} ceiling fan{this.state.secondFloorCeilingFanCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.secondFloorDedicated ? <li>Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </li> : ''}
+            {this.state.secondFloorSmoke ? <li>Supply and install {this.state.secondFloorSmokeCount} smoke detector{this.state.secondFloorSmokeCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.secondFloorCO ? <li>Supply and install {this.state.secondFloorCOCount} CO detector{this.state.secondFloorCOCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.secondFloorOther ? <li>{this.state.secondFloorOtherText}</li> : ''}
+          </ul>
+          {/*End Second Floor*/}
+          <p className="title is-4">{this.state.thirdFloor}</p>
+          <ul>
+            {this.state.thirdFloorRewire ? <li>Rewire {this.state.thirdFloorRewiring}: standard white switches and plugs. </li> : ''}
+            {this.state.thirdFloorRL ? <li>Supply and install {this.state.thirdFloorRLCount} recessed light{this.state.thirdFloorRLCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.thirdFloorSurfaceLight ? <li>Supply and install {this.state.thirdFloorSurfaceLightCount} surface mount light{this.state.thirdFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.thirdFloorBathFan ? <li>Install power for {this.state.thirdFloorBathFanCount} bathroom exhaust fan{this.state.thirdFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.thirdFloorCeilingFan ? <li>Install power for {this.state.thirdFloorCeilingFanCount} ceiling fan{this.state.thirdFloorCeilingFanCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.thirdFloorDedicated ? <li>Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </li> : ''}
+            {this.state.thirdFloorSmoke ? <li>Supply and install {this.state.thirdFloorSmokeCount} smoke detector{this.state.thirdFloorSmokeCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.thirdFloorCO ? <li>Supply and install {this.state.thirdFloorCOCount} CO detector{this.state.thirdFloorCOCount > 1 ? 's' : ''}</li> : ''}
+            {this.state.thirdFloorOther ? <li>{this.state.thirdFloorOtherText}</li> : ''}
           </ul>
         </div>
       </div>
