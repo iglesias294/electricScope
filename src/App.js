@@ -24,6 +24,8 @@ class App extends Component {
       firstFloorRewiring: 'entire floor',
       firstFloorRL: false,
       firstFloorRLCount: false,
+      firstFloorPendantLight: false,
+      firstFloorPendantLightCount: false,
       firstFloorSurfaceLight: false,
       firstFloorSurfaceLightCount: 0,
       firstFloorBathFan: false,
@@ -93,6 +95,57 @@ class App extends Component {
     }
   }
   render() {
+    const basementItems = (<ul>
+      {this.state.service ? <li>{this.state.service}</li> : ''}
+      {this.state.meter ? <li>{this.state.meter}</li> : ''}
+      {this.state.panel ? <li>{this.state.panel}</li> : ''}
+      {this.state.rewire ? <li>Rewire {this.state.rewire2}: standard white switches and plugs. </li> : ''}
+      {this.state.basement1 ? <li>Supply and install {this.state.basementRec} recessed light{this.state.basementRec > 1 ? 's' : ''}</li> : ''}
+      {this.state.basementLight ? <li>Supply and install {this.state.basementLight2} surface mount light{this.state.basementLight2 > 1 ? 's' : ''}</li> : ''}
+      {this.state.basementBathFan ? <li>Install power for {this.state.basementBathFan2} bathroom exhaust fan{this.state.basementBathFan2 > 1 ? 's' : ''}</li> : ''}
+      {this.state.basementCeilingFan ? <li>Install power for {this.state.basementCeilingFan2} ceiling fan{this.state.basementCeilingFan2 > 1 ? 's' : ''}</li> : ''}
+      {this.state.basementDedicated ? <li>Run dedicated circuits for washer, dryer, furnace, and AC </li> : ''}
+      {this.state.basementSmoke ? <li>Supply and install {this.state.basementSmoke2} smoke detector{this.state.basementSmoke2 > 1 ? 's' : ''}</li> : ''}
+      {this.state.basementCo ? <li>Supply and install {this.state.basementCo2} CO detector{this.state.basementCo2 > 1 ? 's' : ''}</li> : ''}
+      {this.state.basementOther ? <li>{this.state.basementOther2}</li> : ''}
+    </ul>)
+
+
+
+    const firstFloorItems = (<ul>{this.state.firstFloorRewire ? <li>Rewire {this.state.firstFloorRewiring}: standard white switches and plugs. </li> : ''}
+      {this.state.firstFloorRL ? <li>Supply and install {this.state.firstFloorRLCount} recessed light{this.state.firstFloorRLCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.firstFloorPendantLight ? <li>Supply and install {this.state.firstFloorPendantLightCount} pendant light{this.state.firstFloorPendantLightCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.firstFloorSurfaceLight ? <li>Supply and install {this.state.firstFloorSurfaceLightCount} surface mount light{this.state.firstFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.firstFloorBathFan ? <li>Install power for {this.state.firstFloorBathFanCount} bathroom exhaust fan{this.state.firstFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.firstFloorCeilingFan ? <li>Install power for {this.state.firstFloorCeilingFanCount} ceiling fan{this.state.firstFloorCeilingFanCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.firstFloorDedicated ? <li>Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </li> : ''}
+      {this.state.firstFloorSmoke ? <li>Supply and install {this.state.firstFloorSmokeCount} smoke detector{this.state.firstFloorSmokeCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.firstFloorCO ? <li>Supply and install {this.state.firstFloorCOCount} CO detector{this.state.firstFloorCOCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.firstFloorOther ? <li>{this.state.firstFloorOtherText}</li> : ''}</ul>)
+
+    const secondFloorItems = (<ul>
+      {this.state.secondFloorRewire ? <li>Rewire {this.state.secondFloorRewiring}: standard white switches and plugs. </li> : ''}
+      {this.state.secondFloorRL ? <li>Supply and install {this.state.secondFloorRLCount} recessed light{this.state.secondFloorRLCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.secondFloorSurfaceLight ? <li>Supply and install {this.state.secondFloorSurfaceLightCount} surface mount light{this.state.secondFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.secondFloorBathFan ? <li>Install power for {this.state.secondFloorBathFanCount} bathroom exhaust fan{this.state.secondFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.secondFloorCeilingFan ? <li>Install power for {this.state.secondFloorCeilingFanCount} ceiling fan{this.state.secondFloorCeilingFanCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.secondFloorDedicated ? <li>Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </li> : ''}
+      {this.state.secondFloorSmoke ? <li>Supply and install {this.state.secondFloorSmokeCount} smoke detector{this.state.secondFloorSmokeCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.secondFloorCO ? <li>Supply and install {this.state.secondFloorCOCount} CO detector{this.state.secondFloorCOCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.secondFloorOther ? <li>{this.state.secondFloorOtherText}</li> : ''}
+    </ul>)
+
+    const thirdFloorItems = (<ul>
+      {this.state.thirdFloorRewire ? <li>Rewire {this.state.thirdFloorRewiring}: standard white switches and plugs. </li> : ''}
+      {this.state.thirdFloorRL ? <li>Supply and install {this.state.thirdFloorRLCount} recessed light{this.state.thirdFloorRLCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.thirdFloorSurfaceLight ? <li>Supply and install {this.state.thirdFloorSurfaceLightCount} surface mount light{this.state.thirdFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.thirdFloorBathFan ? <li>Install power for {this.state.thirdFloorBathFanCount} bathroom exhaust fan{this.state.thirdFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.thirdFloorCeilingFan ? <li>Install power for {this.state.thirdFloorCeilingFanCount} ceiling fan{this.state.thirdFloorCeilingFanCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.thirdFloorDedicated ? <li>Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </li> : ''}
+      {this.state.thirdFloorSmoke ? <li>Supply and install {this.state.thirdFloorSmokeCount} smoke detector{this.state.thirdFloorSmokeCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.thirdFloorCO ? <li>Supply and install {this.state.thirdFloorCOCount} CO detector{this.state.thirdFloorCOCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.thirdFloorOther ? <li>{this.state.thirdFloorOtherText}</li> : ''}
+    </ul>)
 
     return (
       <div className="App">
@@ -318,6 +371,20 @@ class App extends Component {
                     type="number" className="input"
                     value={this.state.firstFloorRLCount}
                     onChange={(event) => this.setState({ firstFloorRLCount: event.target.value })}
+                  />
+                </p>
+                <p>
+                  <input
+                    name="firstFloorPendantLight"
+                    type="checkbox"
+                    value={this.state.firstFloorPendantLight}
+                    onChange={this.handleInputChange}
+                  /><label>Pendant Lights?</label>
+                  <input
+                    name="firstFloorPendantLightCount"
+                    type="number" className="input"
+                    value={this.state.firstFloorPendantLightCount}
+                    onChange={(event) => this.setState({ firstFloorPendantLightCount: event.target.value })}
                   />
                 </p>
                 <p>
@@ -698,61 +765,17 @@ class App extends Component {
           <p className="title">Scope of Work</p>
           {/*Begin Basement*/}
           <p className="title is-4">{this.state.basement}</p>
-          <ul>
-            {this.state.service ? <li>{this.state.service}</li> : ''}
-            {this.state.meter ? <li>{this.state.meter}</li> : ''}
-            {this.state.panel ? <li>{this.state.panel}</li> : ''}
-            {this.state.rewire ? <li>Rewire {this.state.rewire2}: standard white switches and plugs. </li> : ''}
-            {this.state.basement1 ? <li>Supply and install {this.state.basementRec} recessed light{this.state.basementRec > 1 ? 's' : ''}</li> : ''}
-            {this.state.basementLight ? <li>Supply and install {this.state.basementLight2} surface mount light{this.state.basementLight2 > 1 ? 's' : ''}</li> : ''}
-            {this.state.basementBathFan ? <li>Install power for {this.state.basementBathFan2} bathroom exhaust fan{this.state.basementBathFan2 > 1 ? 's' : ''}</li> : ''}
-            {this.state.basementCeilingFan ? <li>Install power for {this.state.basementCeilingFan2} ceiling fan{this.state.basementCeilingFan2 > 1 ? 's' : ''}</li> : ''}
-            {this.state.basementDedicated ? <li>Run dedicated circuits for washer, dryer, furnace, and AC </li> : ''}
-            {this.state.basementSmoke ? <li>Supply and install {this.state.basementSmoke2} smoke detector{this.state.basementSmoke2 > 1 ? 's' : ''}</li> : ''}
-            {this.state.basementCo ? <li>Supply and install {this.state.basementCo2} CO detector{this.state.basementCo2 > 1 ? 's' : ''}</li> : ''}
-            {this.state.basementOther ? <li>{this.state.basementOther2}</li> : ''}
-          </ul>
+          {this.state.basement ? basementItems : ''}
           {/*End Basement*/}
-
           {/*Begin First Floor*/}
           <p className="title is-4">{this.state.firstFloor}</p>
-          <ul>
-            {this.state.firstFloorRewire ? <li>Rewire {this.state.firstFloorRewiring}: standard white switches and plugs. </li> : ''}
-            {this.state.firstFloorRL ? <li>Supply and install {this.state.firstFloorRLCount} recessed light{this.state.firstFloorRLCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.firstFloorSurfaceLight ? <li>Supply and install {this.state.firstFloorSurfaceLightCount} surface mount light{this.state.firstFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.firstFloorBathFan ? <li>Install power for {this.state.firstFloorBathFanCount} bathroom exhaust fan{this.state.firstFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.firstFloorCeilingFan ? <li>Install power for {this.state.firstFloorCeilingFanCount} ceiling fan{this.state.firstFloorCeilingFanCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.firstFloorDedicated ? <li>Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </li> : ''}
-            {this.state.firstFloorSmoke ? <li>Supply and install {this.state.firstFloorSmokeCount} smoke detector{this.state.firstFloorSmokeCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.firstFloorCO ? <li>Supply and install {this.state.firstFloorCOCount} CO detector{this.state.firstFloorCOCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.firstFloorOther ? <li>{this.state.firstFloorOtherText}</li> : ''}
-          </ul>
+          {this.state.firstFloor ? firstFloorItems : ''}
           {/*End First Floor*/}
           <p className="title is-4">{this.state.secondFloor}</p>
-          <ul>
-            {this.state.secondFloorRewire ? <li>Rewire {this.state.secondFloorRewiring}: standard white switches and plugs. </li> : ''}
-            {this.state.secondFloorRL ? <li>Supply and install {this.state.secondFloorRLCount} recessed light{this.state.secondFloorRLCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.secondFloorSurfaceLight ? <li>Supply and install {this.state.secondFloorSurfaceLightCount} surface mount light{this.state.secondFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.secondFloorBathFan ? <li>Install power for {this.state.secondFloorBathFanCount} bathroom exhaust fan{this.state.secondFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.secondFloorCeilingFan ? <li>Install power for {this.state.secondFloorCeilingFanCount} ceiling fan{this.state.secondFloorCeilingFanCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.secondFloorDedicated ? <li>Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </li> : ''}
-            {this.state.secondFloorSmoke ? <li>Supply and install {this.state.secondFloorSmokeCount} smoke detector{this.state.secondFloorSmokeCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.secondFloorCO ? <li>Supply and install {this.state.secondFloorCOCount} CO detector{this.state.secondFloorCOCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.secondFloorOther ? <li>{this.state.secondFloorOtherText}</li> : ''}
-          </ul>
+          {this.state.secondFloor ? secondFloorItems : ''}
           {/*End Second Floor*/}
           <p className="title is-4">{this.state.thirdFloor}</p>
-          <ul>
-            {this.state.thirdFloorRewire ? <li>Rewire {this.state.thirdFloorRewiring}: standard white switches and plugs. </li> : ''}
-            {this.state.thirdFloorRL ? <li>Supply and install {this.state.thirdFloorRLCount} recessed light{this.state.thirdFloorRLCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.thirdFloorSurfaceLight ? <li>Supply and install {this.state.thirdFloorSurfaceLightCount} surface mount light{this.state.thirdFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.thirdFloorBathFan ? <li>Install power for {this.state.thirdFloorBathFanCount} bathroom exhaust fan{this.state.thirdFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.thirdFloorCeilingFan ? <li>Install power for {this.state.thirdFloorCeilingFanCount} ceiling fan{this.state.thirdFloorCeilingFanCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.thirdFloorDedicated ? <li>Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </li> : ''}
-            {this.state.thirdFloorSmoke ? <li>Supply and install {this.state.thirdFloorSmokeCount} smoke detector{this.state.thirdFloorSmokeCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.thirdFloorCO ? <li>Supply and install {this.state.thirdFloorCOCount} CO detector{this.state.thirdFloorCOCount > 1 ? 's' : ''}</li> : ''}
-            {this.state.thirdFloorOther ? <li>{this.state.thirdFloorOtherText}</li> : ''}
-          </ul>
+          {this.state.thirdFloor ? thirdFloorItems : ''}
         </div>
       </div>
     );
