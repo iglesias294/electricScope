@@ -40,3 +40,14 @@ input{
 @media screen and (max-width: 1087px) {
   .switchbox {
     padding: 3rem; } }
+    
+.navbar{
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+}
+
+a {
+  transition: all 0.2s ease;
+  transition-property: transform, opacity, color, border-color, background-color;
+}
