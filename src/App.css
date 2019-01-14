@@ -46,8 +46,40 @@ input{
   justify-content: center;
   background-color: transparent;
 }
+.navbar-brand{
+  flex: 1;
+  justify-content: center;
+}
 
+.is-dark{
+  flex: 1
+}
 a {
   transition: all 0.2s ease;
   transition-property: transform, opacity, color, border-color, background-color;
+}
+.columns{
+  flex: 1
+}
+
+form{ 
+  flex: 1;
+}
+
+.control{
+  display: flex;
+  margin: 1rem;
+  align-items: center;
+}
+
+input[type=checkbox], input[type=radio] {
+  vertical-align: baseline;
+  size: 5rem;
+  font-size: xx-large;
+}
+.checkbox{
+  margin: auto;
+}
+label.checkbox{
+  margin-left: 1rem;
 }

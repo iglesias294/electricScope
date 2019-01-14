@@ -109,11 +109,11 @@ class App extends Component {
 
       switch (activeForm) {
         case 'basement':
-          return <div>{basementForm()}</div>
+          return basementForm()
         case 'first':
           return firstFloorForm()
         case 'second':
-          return <div>{secondFloorForm()}</div>
+          return secondFloorForm()
         case 'third':
           return thirdFloorForm();
       }
@@ -125,7 +125,6 @@ class App extends Component {
       <form id="1">
         <div id="basementSection" className="column notification switchbox">
           <p className="title">
-
             <input
               name="basement"
               type="checkbox"
