@@ -828,12 +828,13 @@ class App extends Component {
           <div className="column is-one-half" style={{ textAlign: 'left' }}>
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
-              <h1 className="App-title">Electrical Scope</h1>
+              <p className="title">Scope of Work</p>
+              {/* <h1 className="App-title">Electrical Scope</h1> */}
             </header>
             {/* <img src={townhouse} alt="townhouse" /> */}
             <div className="output">
               <hr />
-              <p className="title">Scope of Work</p>
+
               {/*Begin Basement*/}
               <p className="title is-4">{this.state.basement}</p>
               {this.state.basement ? basementItems : ''}
@@ -853,19 +854,19 @@ class App extends Component {
             {/* <form> */}
             <nav className="navbar">
               <div className="navbar-brand">
-                <a className="button is-dark" onClick={(e) => {
+                <a className="button is-white is-large" onClick={(e) => {
                   e.preventDefault()
                   this.setState({ activeForm: 'basement' })
                 }}>Basement</a>
-                <a className="button is-dark" onClick={(e) => {
+                <a className="button is-white is-large" onClick={(e) => {
                   e.preventDefault()
                   this.setState({ activeForm: 'first' })
                 }}>First</a>
-                <a className="button is-dark" onClick={(e) => {
+                <a className="button is-white is-large" onClick={(e) => {
                   e.preventDefault()
                   this.setState({ activeForm: 'second' })
                 }}>Second</a>
-                <a className="button is-dark" onClick={(e) => {
+                <a className="button is-white is-large" onClick={(e) => {
                   e.preventDefault()
                   this.setState({ activeForm: 'third' })
                 }}>Third</a>

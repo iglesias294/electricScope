@@ -13,14 +13,15 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 40px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: #fff;
   padding: 20px;
-  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-title {
@@ -51,7 +52,7 @@ input{
   justify-content: center;
 }
 
-.is-dark{
+.is-dark, .is-light{
   flex: 1
 }
 a {
@@ -82,4 +83,7 @@ input[type=checkbox], input[type=radio] {
 }
 label.checkbox{
   margin-left: 1rem;
+}
+.navbar{
+  margin: 1rem
 }
