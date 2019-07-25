@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import logo from './logo.svg';
-import townhouse from './townhouse.jpg';
+//import townhouse from './townhouse.jpg';
 import './App.css';
+import ClickToSelect from '@mapbox/react-click-to-select'
+console.error = (function () {
+  var error = console.error
+
+  return function (exception) {
+    if ((exception + '').indexOf('Warning: A component is `contentEditable`') != 0) {
+      error.apply(console, arguments)
+    }
+  }
+})()
 
 class App extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
+      clickable: false,
+      DOMloaded: false,
+      textAreaText: "",
       activeForm: 'basement',
       basement: '',
       service: false,
@@ -19,6 +34,7 @@ class App extends Component {
       basementDedicated: false,
       basementSmoke: false,
       basementCo: false,
+      basementData: false,
       basementOther: false,
       basementRec: '',
       rewire: false,
@@ -99,9 +115,23 @@ class App extends Component {
     }
   }
 
-
-
+  selectFix = e => {
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.selectNodeContents(this.output);
+    sel.removeAllRanges();
+    if (this.state.clickable) { sel.addRange(range) }
+  }
+  selectAll = e => {
+    e.preventDefault()
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.selectNodeContents(this.output);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
   render() {
+
 
     let activeForm = this.state.activeForm;
 
@@ -125,204 +155,258 @@ class App extends Component {
       <form id="1">
         <div id="basementSection" className="column notification switchbox">
           <p className="title">
-            <input
-              name="basement"
-              type="checkbox"
-              value="Basement"
-              checked={this.state.basement}
-              onChange={this.handleInputChange}
-            /><label className="checkbox">Basement</label></p>
+            <label className="checkbox">
+              <input
+                name="basement"
+                type="checkbox"
+                value="Basement"
+                checked={this.state.basement}
+                onChange={this.handleInputChange}
+              />Basement</label></p>
 
           <div className="control">
-            <input
-              name="service"
-              type="checkbox"
-              checked={this.state.service}
-              value="Replace service entrance cable"
-              onChange={this.handleInputChange}
-            /> <label className="checkbox field-label">Service</label>
+            <label className="checkbox">
+              Service
+              <input
+                name="service"
+                type="checkbox"
+                checked={this.state.service}
+                value="Replace service entrance cable"
+                onChange={this.handleInputChange}
+              />
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div className="control">
-            <input
-              name="meter"
-              type="checkbox"
-              checked={this.state.meter}
-              value="Supply and install 200 amp meter"
-              onChange={this.handleInputChange}
-            /><label className="checkbox">Meter</label>
+            <label className="checkbox">Meter
+              <input
+                name="meter"
+                type="checkbox"
+                checked={this.state.meter}
+                value="Supply and install 200 amp meter"
+                onChange={this.handleInputChange}
+              />
+              <span class="checkmark"></span>
+            </label>
           </div>
           <div className="control">
+            <label className="checkbox">Panel
             <input
-              name="panel"
-              type="checkbox"
-              checked={this.state.panel}
-              value="Supply and install 200 amp panel"
-              onChange={this.handleInputChange}
-            /><label className="checkbox">Panel</label>
-          </div>
-
-          <div className="control">
-            <input
-              name="rewire"
-              type="checkbox"
-              checked={this.state.rewire != false}
-              value={this.state.basement1}
-              onChange={this.handleInputChange}
-            /><label className="checkbox field-label">Rewire</label>
-            <input
-              className="field-body is-small"
-              name="rewire2"
-              type="text"
-              className="input"
-              placeholder="entire floor"
-              value={this.state.rewire2}
-              onChange={(event) => this.setState({ rewire2: event.target.value })}
-            />
+                name="panel"
+                type="checkbox"
+                checked={this.state.panel}
+                value="Supply and install 200 amp panel"
+                onChange={this.handleInputChange}
+              />
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div className="control">
+            <label className="checkbox field-label">Rewire
             <input
-              name="basement1"
-              type="checkbox"
-              value={this.state.basement1}
-              checked={this.state.basement1 != false}
-              onChange={this.handleInputChange}
-            /><label className="checkbox">Recessed lights?</label>
-            <input
-              name="basementRec"
-              type="number" className="input"
-              value={this.state.basementRec}
-              onChange={(event) => this.setState({ basementRec: event.target.value })}
-            />
+                name="rewire"
+                type="checkbox"
+                checked={this.state.rewire != false}
+                value={this.state.basement1}
+                onChange={this.handleInputChange}
+              />
+              <span class="checkmark"></span>
+
+              <input
+                className="field-body is-small"
+                name="rewire2"
+                type="text"
+                className="input freestyle"
+                placeholder="entire floor"
+                value={this.state.rewire2}
+                onChange={(event) => this.setState({ rewire2: event.target.value })}
+              />
+            </label>
           </div>
 
           <div className="control">
+            <label className="checkbox">Recessed lights?
             <input
-              name="basementLight"
-              type="checkbox"
-              checked={this.state.basementLight != false}
-              value={this.state.basementLight}
-              onChange={this.handleInputChange}
-            /><label className="checkbox">Surface Mount Lighting?</label>
-            <input
-              name="basementLight2"
-              type="number" className="input"
-              value={this.state.basementLight2}
-              onChange={(event) => this.setState({ basementLight2: event.target.value })}
-            />
+                name="basement1"
+                type="checkbox"
+                value={this.state.basement1}
+                checked={this.state.basement1 != false}
+                onChange={this.handleInputChange}
+              /><span class="checkmark"></span>
+
+              <input
+                name="basementRec"
+                type="number"
+                className="input"
+                value={this.state.basementRec}
+                onChange={(event) => this.setState({ basementRec: event.target.value })}
+              />
+            </label>
           </div>
 
           <div className="control">
+            <label className="checkbox">Surface Mount Lighting?
             <input
-              name="basementBathFan"
-              type="checkbox"
-              checked={this.state.basementBathFan != false}
-              value={this.state.basementBathFan}
-              onChange={this.handleInputChange}
-            /><label className="checkbox">Bath Fans?</label>
-            <input
-              name="basementBathFan2"
-              type="number" className="input"
-              value={this.state.basementBathFan2}
-              onChange={(event) => this.setState({ basementBathFan2: event.target.value })}
-            />
+                name="basementLight"
+                type="checkbox"
+                checked={this.state.basementLight != false}
+                value={this.state.basementLight}
+                onChange={this.handleInputChange}
+              />
+              <span class="checkmark"></span>
+
+              <input
+                name="basementLight2"
+                type="number" className="input"
+                value={this.state.basementLight2}
+                onChange={(event) => this.setState({ basementLight2: event.target.value })}
+              /></label>
           </div>
 
           <div className="control">
+            <label className="checkbox">Bath Fans?
             <input
-              name="basementCeilingFan"
-              type="checkbox"
-              checked={this.state.basementCeilingFan != false}
-              value={this.state.basementCeilingFan}
-              onChange={this.handleInputChange}
-            /><label className="checkbox">Ceiling Fans?</label>
-            <input
-              name="basementCeilingFan2"
-              type="number" className="input"
-              value={this.state.basementCeilingFan2}
-              onChange={(event) => this.setState({ basementCeilingFan2: event.target.value })}
-            />
+                name="basementBathFan"
+                type="checkbox"
+                checked={this.state.basementBathFan != false}
+                value={this.state.basementBathFan}
+                onChange={this.handleInputChange}
+              />
+              <span class="checkmark"></span>
+              <input
+                name="basementBathFan2"
+                type="number" className="input"
+                value={this.state.basementBathFan2}
+                onChange={(event) => this.setState({ basementBathFan2: event.target.value })}
+              /></label>
           </div>
 
           <div className="control">
+            <label className="checkbox">Ceiling Fans?
             <input
-              name="basementDedicated"
-              type="checkbox"
-              checked={this.state.basementDedicated != false}
-              value={this.state.basementDedicated}
-              onChange={this.handleInputChange}
-            />
-            <label className="checkbox">Dedicated Circuits?</label>
+                name="basementCeilingFan"
+                type="checkbox"
+                checked={this.state.basementCeilingFan != false}
+                value={this.state.basementCeilingFan}
+                onChange={this.handleInputChange}
+              />
+              <span class="checkmark"></span>
 
+              <input
+                name="basementCeilingFan2"
+                type="number" className="input"
+                value={this.state.basementCeilingFan2}
+                onChange={(event) => this.setState({ basementCeilingFan2: event.target.value })}
+              /></label>
           </div>
 
           <div className="control">
+            <label className="checkbox">Dedicated Circuits?
+            <input
+                name="basementDedicated"
+                type="checkbox"
+                checked={this.state.basementDedicated != false}
+                value={this.state.basementDedicated}
+                onChange={this.handleInputChange}
+              />
+              <span class="checkmark"></span>
+
+            </label>
+          </div>
+
+          <div className="control"><label className="checkbox">Smoke Detectors
             <input
               name="basementSmoke"
               type="checkbox"
               checked={this.state.basementSmoke}
               value={this.state.basementSmoke}
               onChange={this.handleInputChange}
-            /><label className="checkbox">Smoke Detectors</label>
+            />
+            <span class="checkmark"></span>
             <input
               name="basementSmoke2"
               type="number" className="input"
               value={this.state.basementSmoke2}
               onChange={(event) => this.setState({ basementSmoke2: event.target.value })}
-            />
+            /></label>
           </div>
 
           <div className="control">
+            <label className="checkbox">CO Detectors
             <input
-              name="basementCo"
+                name="basementCo"
+                type="checkbox"
+                checked={this.state.basementCo != false}
+                value={this.state.basementCo}
+                onChange={this.handleInputChange}
+              />  <span class="checkmark"></span>
+
+              <input
+                name="basementSmoke2"
+                type="number" className="input"
+                value={this.state.basementCo2}
+                onChange={(event) => this.setState({ basementCo2: event.target.value })}
+              /></label>
+          </div>
+
+          <div className="control"> <label className="checkbox">TV & Data
+            <input
+              name="basementData"
               type="checkbox"
-              checked={this.state.basementCo != false}
-              value={this.state.basementCo}
+              checked={this.state.basementData != false}
+              value={this.state.basementData}
               onChange={this.handleInputChange}
-            /><label className="checkbox">CO Detectors</label>
+            /><span class="checkmark"></span>
+
             <input
-              name="basementSmoke2"
+              name="basementData2"
               type="number" className="input"
-              value={this.state.basementCo2}
-              onChange={(event) => this.setState({ basementCo2: event.target.value })}
-            />
+              value={this.state.basementData2}
+              onChange={(event) => this.setState({ basementData2: event.target.value })}
+            /></label>
           </div>
 
           <div className="control">
+            <label className="checkbox">Other
             <input
-              name="basementOther"
-              type="checkbox"
-              checked={this.state.basementOther}
-              value={this.state.basementOther}
-              onChange={this.handleInputChange}
-            />
-            <input
-              name="basementOther2"
-              type="text"
-              className="input"
-              className="input"
-              value={this.state.basementOther2}
-              onChange={(event) => this.setState({ basementOther2: event.target.value })}
-            />
+                name="basementOther"
+                type="checkbox"
+                checked={this.state.basementOther}
+                value={this.state.basementOther}
+                onChange={this.handleInputChange}
+              /><span class="checkmark"></span>
+              <input
+                name="basementOther2"
+                type="text"
+                className="input freestyle"
+                placeholder="other"
+                value={this.state.basementOther2}
+                onChange={(event) => this.setState({ basementOther2: event.target.value })}
+              />
+            </label>
           </div>
         </div>
       </form>
     )
-    const basementItems = (<ul>
-      {this.state.service ? <li>{this.state.service}</li> : ''}
-      {this.state.meter ? <li>{this.state.meter}</li> : ''}
-      {this.state.panel ? <li>{this.state.panel}</li> : ''}
-      {this.state.rewire ? <li>Rewire {this.state.rewire2}: standard white switches and plugs. </li> : ''}
-      {this.state.basement1 ? <li>Supply and install {this.state.basementRec} recessed light{this.state.basementRec > 1 ? 's' : ''}</li> : ''}
-      {this.state.basementLight ? <li>Supply and install {this.state.basementLight2} surface mount light{this.state.basementLight2 > 1 ? 's' : ''}</li> : ''}
-      {this.state.basementBathFan ? <li>Install power for {this.state.basementBathFan2} bathroom exhaust fan{this.state.basementBathFan2 > 1 ? 's' : ''}</li> : ''}
-      {this.state.basementCeilingFan ? <li>Install power for {this.state.basementCeilingFan2} ceiling fan{this.state.basementCeilingFan2 > 1 ? 's' : ''}</li> : ''}
-      {this.state.basementDedicated ? <li>Run dedicated circuits for washer, dryer, furnace, and AC </li> : ''}
-      {this.state.basementSmoke ? <li>Supply and install {this.state.basementSmoke2} smoke detector{this.state.basementSmoke2 > 1 ? 's' : ''}</li> : ''}
-      {this.state.basementCo ? <li>Supply and install {this.state.basementCo2} CO detector{this.state.basementCo2 > 1 ? 's' : ''}</li> : ''}
-      {this.state.basementOther ? <li>{this.state.basementOther2}</li> : ''}
-    </ul>)
+    const basementItems = (
+      <ul>
+        {this.state.service ? <li><p contentEditable="true">{this.state.service}</p></li> : ''}
+        {this.state.meter ? <li><p contentEditable="true">{this.state.meter}</p></li> : ''}
+        {this.state.panel ? <li><p contentEditable="true">{this.state.panel}</p></li> : ''}
+        {this.state.rewire ? <li><p contentEditable="true">Rewire {this.state.rewire2}: standard white switches and plugs. </p></li> : ''}
+        {this.state.basement1 ? <li><p contentEditable="true">Supply and install {this.state.basementRec} recessed light{this.state.basementRec > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementLight ? <li><p contentEditable="true">Install {this.state.basementLight2} surface mount light{this.state.basementLight2 > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementBathFan ? <li><p contentEditable="true">Install power for {this.state.basementBathFan2} bathroom exhaust fan{this.state.basementBathFan2 > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementCeilingFan ? <li><p contentEditable="true">Install power for {this.state.basementCeilingFan2} ceiling fan{this.state.basementCeilingFan2 > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementDedicated ? <li><p contentEditable="true">Run dedicated circuits for washer, dryer, furnace, and AC </p></li> : ''}
+        {this.state.basementSmoke ? <li><p contentEditable="true">Supply and install {this.state.basementSmoke2} smoke detector{this.state.basementSmoke2 > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementCo ? <li><p contentEditable="true">Supply and install {this.state.basementCo2} CO detector{this.state.basementCo2 > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementData ? <li><p contentEditable="true">Supply and install {this.state.basementData2} TV & Data/Phone outlet{this.state.basementData2 > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementOther ? <li><p contentEditable="true">{this.state.basementOther2}</p></li> : ''}
+      </ul>)
+
 
     const firstFloorForm = () => (
       <form id="2">
@@ -491,7 +575,7 @@ class App extends Component {
       </form>
     )
     const firstFloorItems = (<ul>{this.state.firstFloorRewire ? <li>Rewire {this.state.firstFloorRewiring}: standard white switches and plugs. </li> : ''}
-      {this.state.firstFloorRL ? <li>Supply and install {this.state.firstFloorRLCount} recessed light{this.state.firstFloorRLCount > 1 ? 's' : ''}</li> : ''}
+      {this.state.firstFloorRL ? <li><p contentEditable="true">Supply and install {this.state.firstFloorRLCount} recessed light{this.state.firstFloorRLCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.firstFloorPendantLight ? <li>Supply and install {this.state.firstFloorPendantLightCount} pendant light{this.state.firstFloorPendantLightCount > 1 ? 's' : ''}</li> : ''}
       {this.state.firstFloorSurfaceLight ? <li>Supply and install {this.state.firstFloorSurfaceLightCount} surface mount light{this.state.firstFloorSurfaceLightCount > 1 ? 's' : ''}</li> : ''}
       {this.state.firstFloorBathFan ? <li>Install power for {this.state.firstFloorBathFanCount} bathroom exhaust fan{this.state.firstFloorBathFanCount > 1 ? 's' : ''}</li> : ''}
@@ -666,12 +750,13 @@ class App extends Component {
         <p class="title">
           <input
             name="thirdFloor"
+            id="thirdFloor"
             type="checkbox"
             checked={this.state.thirdFloor != false}
             value="Third Floor"
             onChange={this.handleInputChange}
           />
-          <label className="checkbox">Third Floor</label>
+          <label for="thirdFloor" className="checkbox">Third Floor</label>
         </p>
         <div class="control">
           <input
@@ -832,23 +917,26 @@ class App extends Component {
               {/* <h1 className="App-title">Electrical Scope</h1> */}
             </header>
             {/* <img src={townhouse} alt="townhouse" /> */}
-            <div className="output">
-              <hr />
-
+            <div ref={r => this.output = r} className="output">
               {/*Begin Basement*/}
-              <p className="title is-4">{this.state.basement}</p>
+              <p onClick={this.selectAll} className="title is-4">{this.state.basement}</p>
               {this.state.basement ? basementItems : ''}
               {/*End Basement*/}
               {/*Begin First Floor*/}
-              <p className="title is-4">{this.state.firstFloor}</p>
+              <p onClick={this.selectAll} className="title is-4">{this.state.firstFloor}</p>
               {this.state.firstFloor ? firstFloorItems : ''}
               {/*End First Floor*/}
-              <p className="title is-4">{this.state.secondFloor}</p>
+              <p onClick={this.selectAll} className="title is-4">{this.state.secondFloor}</p>
               {this.state.secondFloor ? secondFloorItems : ''}
               {/*End Second Floor*/}
-              <p className="title is-4">{this.state.thirdFloor}</p>
+              <p onClick={this.selectAll} className="title is-4">{this.state.thirdFloor}</p>
               {this.state.thirdFloor ? thirdFloorItems : ''}
+
             </div>
+
+            {/* form output*/}
+
+
           </div>
           <div className="column">
             {/* <form> */}
