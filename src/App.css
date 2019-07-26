@@ -1,19 +1,19 @@
 .App {
   text-align: left;
-  
+  padding: 1.5rem;
 }
-.OuterContainer{
+/* .OuterContainer{
   display: grid;
   grid-template-columns: 25% 75%;
-}
-.FormContainer{
+} */
+/* .FormContainer{
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
-}
+} */
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40px;
+  /* animation: App-logo-spin infinite 20s linear; */
+  height: 60px;
 }
 
 .App-header {
