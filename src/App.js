@@ -48,6 +48,8 @@ class App extends Component {
       firstFloorPendantLightCount: false,
       firstFloorSurfaceLight: false,
       firstFloorSurfaceLightCount: 0,
+      firstFloorExteriorGfci: false,
+      firstFloorExteriorGfciCount: 2,
       firstFloorBathFan: false,
       firstFloorBathFanCount: false,
       firstFloorCeilingFan: false,
@@ -479,6 +481,25 @@ class App extends Component {
             </label>
           </div>
           <div className="control">
+            <label className="checkbox">Exterior GFCI Plugs?
+            <input
+                name="firstFloorExteriorGfci"
+                type="checkbox"
+                checked={this.state.firstFloorExteriorGfci != false}
+                value={this.state.firstFloorExteriorGfci}
+                onChange={this.handleInputChange}
+              />
+              <span class="checkmark"></span>
+
+              <input
+                name="firstFloorExteriorGfciCount"
+                type="number" className="input"
+                value={this.state.firstFloorExteriorGfciCount}
+                onChange={(event) => this.setState({ firstFloorExteriorGfciCount: event.target.value })}
+              />
+            </label>
+          </div>
+          <div className="control">
             <label className="checkbox">Surface Mount Lighting?
               <input
                 name="firstFloorSurfaceLight"
@@ -624,9 +645,10 @@ class App extends Component {
       {this.state.firstFloorRewire ? <li><p contentEditable="true">Rewire {this.state.firstFloorRewiring}: standard white switches and plugs. </p></li> : ''}
       {this.state.firstFloorRL ? <li><p contentEditable="true">Supply and install {this.state.firstFloorRLCount} recessed light{this.state.firstFloorRLCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.firstFloorPendantLight ? <li><p contentEditable="true">Supply and install {this.state.firstFloorPendantLightCount} pendant light{this.state.firstFloorPendantLightCount > 1 ? 's' : ''}</p></li> : ''}
+      {this.state.firstFloorExteriorGfci ? <li><p contentEditable="true">Supply and install {this.state.firstFloorExteriorGfciCount} exterior GFCI</p></li> : ''}
       {this.state.firstFloorSurfaceLight ? <li><p contentEditable="true">Install {this.state.firstFloorSurfaceLightCount} surface mount light{this.state.firstFloorSurfaceLightCount > 1 ? 's' : ''}</p></li> : ''}
-      {this.state.firstFloorCeilingFan ? <li><p contentEditable="true">Install power for {this.state.firstFloorCeilingFanCount} ceiling fan{this.state.firstFloorCeilingFanCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.firstFloorBathFan ? <li><p contentEditable="true">Install power for {this.state.firstFloorBathFanCount} bathroom exhaust fan{this.state.firstFloorBathFanCount > 1 ? 's' : ''}</p></li> : ''}
+      {this.state.firstFloorCeilingFan ? <li><p contentEditable="true">Install {this.state.firstFloorCeilingFanCount} ceiling fan{this.state.firstFloorCeilingFanCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.firstFloorDedicated ? <li><p contentEditable="true">Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </p></li> : ''}
       {this.state.firstFloorSmoke ? <li><p contentEditable="true">Supply and install {this.state.firstFloorSmokeCount} smoke detector{this.state.firstFloorSmokeCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.firstFloorCO ? <li><p contentEditable="true">Supply and install {this.state.firstFloorCOCount} CO detector{this.state.firstFloorCOCount > 1 ? 's' : ''}</p></li> : ''}
@@ -818,9 +840,10 @@ class App extends Component {
             /><span class="checkmark"></span>
             <input
               name="secondFloorOtherText"
+              id="other3"
               type="text"
               className="input freestyle"
-              placeholder="other"
+              placeholder="other text"
               value={this.state.secondFloorOtherText}
               onFocus={e => this.setState({ secondFloorOther: true })}
               onChange={(event) => this.setState({ secondFloorOtherText: event.target.value })}
@@ -834,7 +857,7 @@ class App extends Component {
       {this.state.secondFloorRL ? <li><p contentEditable="true">Supply and install {this.state.secondFloorRLCount} recessed light{this.state.secondFloorRLCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.secondFloorSurfaceLight ? <li><p contentEditable="true">Install {this.state.secondFloorSurfaceLightCount} surface mount light{this.state.secondFloorSurfaceLightCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.secondFloorBathFan ? <li><p contentEditable="true">Install power for {this.state.secondFloorBathFanCount} bathroom exhaust fan{this.state.secondFloorBathFanCount > 1 ? 's' : ''}</p></li> : ''}
-      {this.state.secondFloorCeilingFan ? <li><p contentEditable="true">Install power for {this.state.secondFloorCeilingFanCount} ceiling fan{this.state.secondFloorCeilingFanCount > 1 ? 's' : ''}</p></li> : ''}
+      {this.state.secondFloorCeilingFan ? <li><p contentEditable="true">Install {this.state.secondFloorCeilingFanCount} ceiling fan{this.state.secondFloorCeilingFanCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.secondFloorDedicated ? <li><p contentEditable="true">Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </p></li> : ''}
       {this.state.secondFloorSmoke ? <li><p contentEditable="true">Supply and install {this.state.secondFloorSmokeCount} smoke detector{this.state.secondFloorSmokeCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.secondFloorCO ? <li><p contentEditable="true">Supply and install {this.state.secondFloorCOCount} CO detector{this.state.secondFloorCOCount > 1 ? 's' : ''}</p></li> : ''}
@@ -1031,8 +1054,10 @@ class App extends Component {
             /><span class="checkmark"></span>
             <input
               name="thirdFloorOtherText"
+              id="other3"
               type="text"
               className="input freestyle"
+              placeholder="other"
               value={this.state.thirdFloorOtherText}
               onFocus={e => this.setState({ thirdFloorOther: true })}
               onChange={(event) => this.setState({ thirdFloorOtherText: event.target.value })}
@@ -1046,12 +1071,13 @@ class App extends Component {
       {this.state.thirdFloorRL ? <li><p contentEditable="true">Supply and install {this.state.thirdFloorRLCount} recessed light{this.state.thirdFloorRLCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorSurfaceLight ? <li><p contentEditable="true">Install {this.state.thirdFloorSurfaceLightCount} surface mount light{this.state.thirdFloorSurfaceLightCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorBathFan ? <li><p contentEditable="true">Install power for {this.state.thirdFloorBathFanCount} bathroom exhaust fan{this.state.thirdFloorBathFanCount > 1 ? 's' : ''}</p></li> : ''}
-      {this.state.thirdFloorCeilingFan ? <li><p contentEditable="true">Install power for {this.state.thirdFloorCeilingFanCount} ceiling fan{this.state.thirdFloorCeilingFanCount > 1 ? 's' : ''}</p></li> : ''}
+      {this.state.thirdFloorCeilingFan ? <li><p contentEditable="true">Install {this.state.thirdFloorCeilingFanCount} ceiling fan{this.state.thirdFloorCeilingFanCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorDedicated ? <li><p contentEditable="true">Run dedicated circuits for microwave, range, refrigerator, dishwasher, disposal, GFCI, under-cabinet lights </p></li> : ''}
       {this.state.thirdFloorSmoke ? <li><p contentEditable="true">Supply and install {this.state.thirdFloorSmokeCount} smoke detector{this.state.thirdFloorSmokeCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorCO ? <li><p contentEditable="true">Supply and install {this.state.thirdFloorCOCount} CO detector{this.state.thirdFloorCOCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorData ? <li><p contentEditable="true">Supply and install {this.state.thirdFloorData2} TV & Data/Phone outlet{this.state.thirdFloorData2 > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorOther ? <li><p contentEditable="true">{this.state.thirdFloorOtherText}</p></li> : ''}
+      <li><p>.</p></li>
     </ul>)
 
     return (
