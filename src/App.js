@@ -27,23 +27,27 @@ class App extends Component {
       service: false,
       meter: false,
       panel: false,
-      basement1: false,
-      basementLight: false,
+      basementRL: false,
+      basementRLCount: 0,
+      basementSurfaceLight: false,
+      basementSurfaceLightCount: 0,
       basementBathFan: false,
       basementCeilingFan: false,
       basementDedicated: false,
       basementSmoke: false,
+      basementSmokeCount: 0,
       basementCo: false,
+      basementCoCount: 0,
       basementData: false,
       basementOther: false,
-      basementRec: '',
+      basementOtherText: '',
       rewire: false,
       rewire2: 'entire floor',
       firstFloor: '',
       firstFloorRewire: false,
       firstFloorRewiring: 'entire floor',
       firstFloorRL: false,
-      firstFloorRLCount: false,
+      firstFloorRLCount: 0,
       firstFloorPendantLight: false,
       firstFloorPendantLightCount: false,
       firstFloorSurfaceLight: false,
@@ -58,14 +62,15 @@ class App extends Component {
       firstFloorSmoke: false,
       firstFloorSmokeCount: 0,
       firstFloorCO: false,
+      firstFloorCOCount: 0,
       firstFloorData: false,
       firstFloorOther: false,
-      firstFloorRec: '',
+      firstFloorOtherText: '',
       secondFloor: '',
       secondFloorRewire: false,
       secondFloorRewiring: 'entire floor',
       secondFloorRL: false,
-      secondFloorRLCount: false,
+      secondFloorRLCount: 0,
       secondFloorSurfaceLight: false,
       secondFloorSurfaceLightCount: 0,
       secondFloorBathFan: false,
@@ -76,14 +81,15 @@ class App extends Component {
       secondFloorSmoke: false,
       secondFloorSmokeCount: 0,
       secondFloorCO: false,
+      secondFloorCOCount: 0,
       secondFloorData: false,
       secondFloorOther: false,
-      secondFloorRec: '',
+      secondFloorOtherText: '',
       thirdFloor: '',
       thirdFloorRewire: false,
       thirdFloorRewiring: 'entire floor',
       thirdFloorRL: false,
-      thirdFloorRLCount: false,
+      thirdFloorRLCount: 0,
       thirdFloorSurfaceLight: false,
       thirdFloorSurfaceLightCount: 0,
       thirdFloorBathFan: false,
@@ -94,8 +100,10 @@ class App extends Component {
       thirdFloorSmoke: false,
       thirdFloorSmokeCount: 0,
       thirdFloorCO: false,
+      thirdFloorCOCount: 0,
       thirdFloorData: false,
       thirdFloorOther: false,
+      thirdFloorOtherText: '',
       thirdFloorRec: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -128,6 +136,22 @@ class App extends Component {
     document.execCommand('copy');
   }
   render() {
+
+    const totalRecessedLights = parseInt(this.state.basementRLCount) + parseInt(this.state.firstFloorRLCount) + parseInt(this.state.secondFloorRLCount) + parseInt(this.state.thirdFloorRLCount)
+    const totalSurfaceMountLights = parseInt(this.state.basementSurfaceLightCount) + 
+    parseInt(this.state.firstFloorSurfaceLightCount) + 
+    parseInt(this.state.secondFloorSurfaceLightCount) + 
+    parseInt(this.state.thirdFloorSurfaceLightCount)
+
+    const totalSmokeDetectors = parseInt(this.state.basementSmokeCount) + 
+    parseInt(this.state.firstFloorSmokeCount) + 
+    parseInt(this.state.secondFloorSmokeCount) + 
+    parseInt(this.state.thirdFloorSmokeCount)
+
+    const totalCoDetectors = parseInt(this.state.basementCoCount) + 
+    parseInt(this.state.firstFloorCOCount) + 
+    parseInt(this.state.secondFloorCOCount) + 
+    parseInt(this.state.thirdFloorCOCount)
 
 
     let activeForm = this.state.activeForm;
@@ -208,7 +232,7 @@ class App extends Component {
                 name="rewire"
                 type="checkbox"
                 checked={this.state.rewire != false}
-                value={this.state.basement1}
+                value={this.state.basementRL}
                 onChange={this.handleInputChange}
               />
               <span class="checkmark"></span>
@@ -229,20 +253,20 @@ class App extends Component {
           <div className="control">
             <label className="checkbox">Recessed lights?
             <input
-                name="basement1"
+                name="basementRL"
                 type="checkbox"
-                value={this.state.basement1}
-                checked={this.state.basement1 != false}
+                value={this.state.basementRL}
+                checked={this.state.basementRL != false}
                 onChange={this.handleInputChange}
 
               /><span class="checkmark"></span>
 
               <input
-                name="basementRec"
+                name="basementRLCount"
                 type="number"
                 className="input"
-                value={this.state.basementRec}
-                onChange={(event) => this.setState({ basementRec: event.target.value })}
+                value={this.state.basementRLCount}
+                onChange={(event) => this.setState({ basementRLCount: event.target.value })}
               />
             </label>
           </div>
@@ -250,19 +274,19 @@ class App extends Component {
           <div className="control">
             <label className="checkbox">Surface Mount Lighting?
             <input
-                name="basementLight"
+                name="basementSurfaceLight"
                 type="checkbox"
-                checked={this.state.basementLight != false}
-                value={this.state.basementLight}
+                checked={this.state.basementSurfaceLight != false}
+                value={this.state.basementSurfaceLight}
                 onChange={this.handleInputChange}
               />
               <span class="checkmark"></span>
 
               <input
-                name="basementLight2"
+                name="basementSurfaceLightCount"
                 type="number" className="input"
-                value={this.state.basementLight2}
-                onChange={(event) => this.setState({ basementLight2: event.target.value })}
+                value={this.state.basementSurfaceLightCount}
+                onChange={(event) => this.setState({ basementSurfaceLightCount: event.target.value })}
               /></label>
           </div>
 
@@ -327,10 +351,10 @@ class App extends Component {
             />
             <span class="checkmark"></span>
             <input
-              name="basementSmoke2"
+              name="basementSmokeCount"
               type="number" className="input"
-              value={this.state.basementSmoke2}
-              onChange={(event) => this.setState({ basementSmoke2: event.target.value })}
+              value={this.state.basementSmokeCount}
+              onChange={(event) => this.setState({ basementSmokeCount: event.target.value })}
             /></label>
           </div>
 
@@ -345,10 +369,10 @@ class App extends Component {
               />  <span class="checkmark"></span>
 
               <input
-                name="basementSmoke2"
+                name="basementSmokeCoCount"
                 type="number" className="input"
-                value={this.state.basementCo2}
-                onChange={(event) => this.setState({ basementCo2: event.target.value })}
+                value={this.state.basementCoCount}
+                onChange={(event) => this.setState({ basementCoCount: event.target.value })}
               /></label>
           </div>
 
@@ -380,12 +404,12 @@ class App extends Component {
                 onChange={this.handleInputChange}
               /><span class="checkmark"></span>
               <input
-                name="basementOther2"
+                name="basementOtherText"
                 type="text"
                 className="input freestyle"
                 placeholder="other"
-                value={this.state.basementOther2}
-                onChange={(event) => this.setState({ basementOther2: event.target.value })}
+                value={this.state.basementOtherText}
+                onChange={(event) => this.setState({ basementOtherText: event.target.value })}
               />
             </label>
           </div>
@@ -398,15 +422,15 @@ class App extends Component {
         {this.state.meter ? <li><p contentEditable="true">{this.state.meter}</p></li> : ''}
         {this.state.panel ? <li><p contentEditable="true">{this.state.panel}</p></li> : ''}
         {this.state.rewire ? <li><p contentEditable="true">Rewire {this.state.rewire2}: standard white switches and plugs. </p></li> : ''}
-        {this.state.basement1 ? <li><p contentEditable="true">Supply and install {this.state.basementRec} recessed light{this.state.basementRec > 1 ? 's' : ''}</p></li> : ''}
-        {this.state.basementLight ? <li><p contentEditable="true">Install {this.state.basementLight2} surface mount light{this.state.basementLight2 > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementRL ? <li><p contentEditable="true">Supply and install {this.state.basementRLCount} recessed light{this.state.basementRLCount > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementSurfaceLight ? <li><p contentEditable="true">Install {this.state.basementSurfaceLightCount} surface mount light{this.state.basementSurfaceLightCount > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementBathFan ? <li><p contentEditable="true">Install power for {this.state.basementBathFan2} bathroom exhaust fan{this.state.basementBathFan2 > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementCeilingFan ? <li><p contentEditable="true">Install power for {this.state.basementCeilingFan2} ceiling fan{this.state.basementCeilingFan2 > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementDedicated ? <li><p contentEditable="true">Run dedicated circuits for washer, dryer, furnace, and AC </p></li> : ''}
-        {this.state.basementSmoke ? <li><p contentEditable="true">Supply and install {this.state.basementSmoke2} smoke detector{this.state.basementSmoke2 > 1 ? 's' : ''}</p></li> : ''}
-        {this.state.basementCo ? <li><p contentEditable="true">Supply and install {this.state.basementCo2} CO detector{this.state.basementCo2 > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementSmoke ? <li><p contentEditable="true">Supply and install {this.state.basementSmokeCount} smoke detector{this.state.basementSmokeCount > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementCo ? <li><p contentEditable="true">Supply and install {this.state.basementCoCount} CO detector{this.state.basementCoCount > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementData ? <li><p contentEditable="true">Supply and install {this.state.basementData2} TV & Data/Phone outlet{this.state.basementData2 > 1 ? 's' : ''}</p></li> : ''}
-        {this.state.basementOther ? <li><p contentEditable="true">{this.state.basementOther2}</p></li> : ''}
+        {this.state.basementOther ? <li><p contentEditable="true">{this.state.basementOtherText}</p></li> : ''}
       </ul>)
 
 
@@ -1108,6 +1132,12 @@ class App extends Component {
 
             </div>
 
+            <hr/>
+            <strong>Material Estimates</strong>
+            <p>Total Recessed Lights: {totalRecessedLights}</p>
+            <p>Total Surface Mount Lights: {totalSurfaceMountLights}</p>
+            <p>Total Smoke Detectors: {totalSmokeDetectors}</p>
+            <p>Total CO Detectors: {totalCoDetectors}</p>
             {/* form output*/}
 
 
