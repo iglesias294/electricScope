@@ -39,6 +39,9 @@ class App extends Component {
       basementData: false,
       basementOther: false,
       basementOtherText: '',
+      basementExtra: false,
+      basementExtraText: '',
+      basementExtrasArray: [],
       rewire: false,
       rewire2: 'entire floor',
       firstFloor: '',
@@ -64,6 +67,9 @@ class App extends Component {
       firstFloorData: false,
       firstFloorOther: false,
       firstFloorOtherText: '',
+      firstFloorExtra: false,
+      firstFloorExtraText: '',
+      firstFloorExtrasArray: [],
       secondFloor: '',
       secondFloorRewire: false,
       secondFloorRewiring: 'entire floor',
@@ -83,6 +89,10 @@ class App extends Component {
       secondFloorData: false,
       secondFloorOther: false,
       secondFloorOtherText: '',
+      secondFloorOtherText: '',
+      secondFloorExtra: false,
+      secondFloorExtraText: '',
+      secondFloorExtrasArray: [],
       thirdFloor: '',
       thirdFloorRewire: false,
       thirdFloorRewiring: 'entire floor',
@@ -102,7 +112,10 @@ class App extends Component {
       thirdFloorData: false,
       thirdFloorOther: false,
       thirdFloorOtherText: '',
-      thirdFloorRec: ''
+      thirdFloorRec: '',
+      thirdFloorExtra: false,
+      thirdFloorExtraText: '',
+      thirdFloorExtrasArray: [],
     }
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -392,7 +405,7 @@ class App extends Component {
               /></label>
           </div>
 
-          <div className="control">
+          {/* <div className="control">
             <label className="checkbox">Other
             <input
                 name="basementOther"
@@ -410,6 +423,48 @@ class App extends Component {
                 onChange={(event) => this.setState({ basementOtherText: event.target.value })}
               />
             </label>
+          </div> */}
+          <div className="control">
+            <label className="checkbox">Extra
+            <input
+                name="basementExtra"
+                type="checkbox"
+                checked={this.state.basementExtra}
+                value={this.state.basementExtra}
+                onChange={this.handleInputChange}
+              /><span class="checkmark"></span>
+              <input
+                name="basementExtraText"
+                type="text"
+                className="input freestyle"
+                placeholder="other"
+                value={this.state.basementExtraText}
+                onKeyUp={e => {
+                e.preventDefault()
+                if (e.key === "Enter") {
+                  let newBasementArray = this.state.basementExtrasArray.slice()
+                  newBasementArray.push(this.state.basementExtraText)
+                  console.log(this.state.basementExtrasArray)
+                  this.setState({basementExtrasArray: newBasementArray})
+                  this.setState({basementExtraText: ''})
+                }
+                
+                }
+                }
+                onChange={(event) => {
+                  this.setState({ basementExtraText: event.target.value })
+                }}
+              />
+              {/* <button onClick={e => {
+                e.preventDefault()
+                let newBasementArray = this.state.basementExtrasArray.slice()
+                newBasementArray.push(this.state.basementExtraText)
+                console.log(this.state.basementExtrasArray)
+                this.setState({basementExtrasArray: newBasementArray})
+                this.setState({basementExtraText: ''})
+                }
+                }>Add Extra</button> */}
+            </label>
           </div>
         </div>
       </form>
@@ -423,12 +478,17 @@ class App extends Component {
         {this.state.basementRL ? <li><p contentEditable="true">{this.state.ownerSuppliesRecessedLights ? 'I' : 'Supply and i'}nstall {this.state.basementRLCount} recessed light{this.state.basementRLCount > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementSurfaceLight ? <li><p contentEditable="true">Install {this.state.basementSurfaceLightCount} surface mount light{this.state.basementSurfaceLightCount > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementBathFan ? <li><p contentEditable="true">Install power for {this.state.basementBathFan2} bathroom exhaust fan{this.state.basementBathFan2 > 1 ? 's' : ''}</p></li> : ''}
-        {this.state.basementCeilingFan ? <li><p contentEditable="true">Install power for {this.state.basementCeilingFan2} ceiling fan{this.state.basementCeilingFan2 > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementCeilingFan ? <li><p contentEditable="true">Install {this.state.basementCeilingFan2} ceiling fan{this.state.basementCeilingFan2 > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementDedicated ? <li><p contentEditable="true">Run dedicated circuits for washer, dryer, furnace, and AC </p></li> : ''}
         {this.state.basementSmoke ? <li><p contentEditable="true">Supply and install {this.state.basementSmokeCount} smoke detector{this.state.basementSmokeCount > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementCo ? <li><p contentEditable="true">Supply and install {this.state.basementCoCount} CO detector{this.state.basementCoCount > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementData ? <li><p contentEditable="true">Supply and install {this.state.basementData2} TV & Data/Phone outlet{this.state.basementData2 > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementOther ? <li><p contentEditable="true">{this.state.basementOtherText}</p></li> : ''}
+        {this.state.basementExtra && this.state.basementExtrasArray.length > 0 ? (
+          this.state.basementExtrasArray.map(item => {
+          return <li><p contentEditable="true">{item}</p></li>
+          }))
+           : ''}
       </ul>)
 
 
@@ -640,7 +700,7 @@ class App extends Component {
           </div>
 
 
-          <div className="control">
+          {/* <div className="control">
             <label className="checkbox">Other
             <input
                 name="firstFloorOther"
@@ -659,6 +719,40 @@ class App extends Component {
                 onChange={(event) => this.setState({ firstFloorOtherText: event.target.value })}
               />
             </label>
+          </div> */}
+          <div className="control">
+            <label className="checkbox">Extra
+            <input
+                name="firstFloorExtra"
+                type="checkbox"
+                checked={this.state.firstFloorExtra}
+                value={this.state.firstFloorExtra}
+                onChange={this.handleInputChange}
+              /><span class="checkmark"></span>
+              <input
+                name="firstFloorExtraText"
+                type="text"
+                className="input freestyle"
+                placeholder="other"
+                value={this.state.firstFloorExtraText}
+                onKeyUp={e => {
+                e.preventDefault()
+                if (e.key === "Enter") {
+                  let newfirstFloorArray = this.state.firstFloorExtrasArray.slice()
+                  newfirstFloorArray.push(this.state.firstFloorExtraText)
+                  console.log(this.state.firstFloorExtrasArray)
+                  this.setState({firstFloorExtrasArray: newfirstFloorArray})
+                  this.setState({firstFloorExtraText: ''})
+                }
+                
+                }
+                }
+                onChange={(event) => {
+                  this.setState({ firstFloorExtraText: event.target.value })
+                }}
+              />
+            
+            </label>
           </div>
         </div>
       </form>
@@ -675,8 +769,16 @@ class App extends Component {
       {this.state.firstFloorSmoke ? <li><p contentEditable="true">Supply and install {this.state.firstFloorSmokeCount} smoke detector{this.state.firstFloorSmokeCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.firstFloorCO ? <li><p contentEditable="true">Supply and install {this.state.firstFloorCOCount} CO detector{this.state.firstFloorCOCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.firstFloorData ? <li><p contentEditable="true">Supply and install {this.state.firstFloorData2} TV & Data/Phone outlet{this.state.firstFloorData2 > 1 ? 's' : ''}</p></li> : ''}
-      {this.state.firstFloorOther ? <li><p contentEditable="true">{this.state.firstFloorOtherText}</p></li> : ''}</ul>)
-
+      {this.state.firstFloorOther ? <li><p contentEditable="true">{this.state.firstFloorOtherText}</p></li> : ''}
+      {this.state.firstFloorExtra && this.state.firstFloorExtrasArray.length > 0 ? (
+        this.state.firstFloorExtrasArray.map(item => {
+        return <li><p contentEditable="true">{item}</p></li>
+        }))
+         : ''} 
+      
+      </ul>)
+         
+         
     const secondFloorForm = () => (
       <div id="secondFloor" className="column notification is-info switchbox">
         <p class="title"><label className="checkbox">Second Floor
@@ -851,7 +953,7 @@ class App extends Component {
         </div>
 
 
-        <div className="control">
+        {/* <div className="control">
           <label className="checkbox">Other?
           <input
               name="secondFloorOther"
@@ -871,7 +973,41 @@ class App extends Component {
               onChange={(event) => this.setState({ secondFloorOtherText: event.target.value })}
             />
           </label>
-        </div>
+        </div> */}
+        <div className="control">
+            <label className="checkbox">Extra
+            <input
+                name="secondFloorExtra"
+                type="checkbox"
+                checked={this.state.secondFloorExtra}
+                value={this.state.secondFloorExtra}
+                onChange={this.handleInputChange}
+              /><span class="checkmark"></span>
+              <input
+                name="secondFloorExtraText"
+                type="text"
+                className="input freestyle"
+                placeholder="other"
+                value={this.state.secondFloorExtraText}
+                onKeyUp={e => {
+                e.preventDefault()
+                if (e.key === "Enter") {
+                  let newsecondFloorArray = this.state.secondFloorExtrasArray.slice()
+                  newsecondFloorArray.push(this.state.secondFloorExtraText)
+                  console.log(this.state.secondFloorExtrasArray)
+                  this.setState({secondFloorExtrasArray: newsecondFloorArray})
+                  this.setState({secondFloorExtraText: ''})
+                }
+                
+                }
+                }
+                onChange={(event) => {
+                  this.setState({ secondFloorExtraText: event.target.value })
+                }}
+              />
+            
+            </label>
+          </div>
       </div>
     )
     const secondFloorItems = (<ul>
@@ -885,6 +1021,11 @@ class App extends Component {
       {this.state.secondFloorCO ? <li><p contentEditable="true">Supply and install {this.state.secondFloorCOCount} CO detector{this.state.secondFloorCOCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.secondFloorData ? <li><p contentEditable="true">Supply and install {this.state.secondFloorData2} TV & Data/Phone outlet{this.state.secondFloorData2 > 1 ? 's' : ''}</p></li> : ''}
       {this.state.secondFloorOther ? <li><p contentEditable="true">{this.state.secondFloorOtherText}</p></li> : ''}
+      {this.state.secondFloorExtra && this.state.secondFloorExtrasArray.length > 0 ? (
+    this.state.secondFloorExtrasArray.map(item => {
+    return <li><p contentEditable="true">{item}</p></li>
+    }))
+     : ''} 
     </ul>)
 
     const thirdFloorForm = () => (
@@ -1065,7 +1206,7 @@ class App extends Component {
             /></label>
         </div>
 
-        <div className="control">
+        {/* <div className="control">
           <label className="checkbox">Other?
             <input
               name="thirdFloorOther"
@@ -1085,7 +1226,42 @@ class App extends Component {
               onChange={(event) => this.setState({ thirdFloorOtherText: event.target.value })}
             />
           </label>
-        </div>
+        </div> */}
+
+        <div className="control">
+            <label className="checkbox">Extra
+            <input
+                name="thirdFloorExtra"
+                type="checkbox"
+                checked={this.state.thirdFloorExtra}
+                value={this.state.thirdFloorExtra}
+                onChange={this.handleInputChange}
+              /><span class="checkmark"></span>
+              <input
+                name="thirdFloorExtraText"
+                type="text"
+                className="input freestyle"
+                placeholder="other"
+                value={this.state.thirdFloorExtraText}
+                onKeyUp={e => {
+                e.preventDefault()
+                if (e.key === "Enter") {
+                  let newthirdFloorArray = this.state.thirdFloorExtrasArray.slice()
+                  newthirdFloorArray.push(this.state.thirdFloorExtraText)
+                  console.log(this.state.thirdFloorExtrasArray)
+                  this.setState({thirdFloorExtrasArray: newthirdFloorArray})
+                  this.setState({thirdFloorExtraText: ''})
+                }
+                
+                }
+                }
+                onChange={(event) => {
+                  this.setState({ thirdFloorExtraText: event.target.value })
+                }}
+              />
+            
+            </label>
+          </div>
       </div>
     )
     const thirdFloorItems = (<ul>
@@ -1099,6 +1275,11 @@ class App extends Component {
       {this.state.thirdFloorCO ? <li><p contentEditable="true">Supply and install {this.state.thirdFloorCOCount} CO detector{this.state.thirdFloorCOCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorData ? <li><p contentEditable="true">Supply and install {this.state.thirdFloorData2} TV & Data/Phone outlet{this.state.thirdFloorData2 > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorOther ? <li><p contentEditable="true">{this.state.thirdFloorOtherText}</p></li> : ''}
+      {this.state.thirdFloorExtra && this.state.thirdFloorExtrasArray.length > 0 ? (
+    this.state.thirdFloorExtrasArray.map(item => {
+    return <li><p contentEditable="true">{item}</p></li>
+    }))
+     : ''} 
       <li><p>.</p></li>
     </ul>)
 
