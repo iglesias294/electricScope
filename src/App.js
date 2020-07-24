@@ -19,10 +19,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      clickable: false,
-      DOMloaded: false,
-      textAreaText: "",
       activeForm: 'basement',
+      ownerSuppliesRecessedLights: false,
       basement: '',
       service: false,
       meter: false,
@@ -422,7 +420,7 @@ class App extends Component {
         {this.state.meter ? <li><p contentEditable="true">{this.state.meter}</p></li> : ''}
         {this.state.panel ? <li><p contentEditable="true">{this.state.panel}</p></li> : ''}
         {this.state.rewire ? <li><p contentEditable="true">Rewire {this.state.rewire2}: standard white switches and plugs. </p></li> : ''}
-        {this.state.basementRL ? <li><p contentEditable="true">Supply and install {this.state.basementRLCount} recessed light{this.state.basementRLCount > 1 ? 's' : ''}</p></li> : ''}
+        {this.state.basementRL ? <li><p contentEditable="true">{this.state.ownerSuppliesRecessedLights ? 'I' : 'Supply and i'}nstall {this.state.basementRLCount} recessed light{this.state.basementRLCount > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementSurfaceLight ? <li><p contentEditable="true">Install {this.state.basementSurfaceLightCount} surface mount light{this.state.basementSurfaceLightCount > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementBathFan ? <li><p contentEditable="true">Install power for {this.state.basementBathFan2} bathroom exhaust fan{this.state.basementBathFan2 > 1 ? 's' : ''}</p></li> : ''}
         {this.state.basementCeilingFan ? <li><p contentEditable="true">Install power for {this.state.basementCeilingFan2} ceiling fan{this.state.basementCeilingFan2 > 1 ? 's' : ''}</p></li> : ''}
@@ -667,7 +665,7 @@ class App extends Component {
     )
     const firstFloorItems = (<ul>
       {this.state.firstFloorRewire ? <li><p contentEditable="true">Rewire {this.state.firstFloorRewiring}: standard white switches and plugs. </p></li> : ''}
-      {this.state.firstFloorRL ? <li><p contentEditable="true">Supply and install {this.state.firstFloorRLCount} recessed light{this.state.firstFloorRLCount > 1 ? 's' : ''}</p></li> : ''}
+      {this.state.firstFloorRL ? <li><p contentEditable="true">{this.state.ownerSuppliesRecessedLights ? 'I' : 'Supply and i'}nstall {this.state.firstFloorRLCount} recessed light{this.state.firstFloorRLCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.firstFloorPendantLight ? <li><p contentEditable="true">Supply and install {this.state.firstFloorPendantLightCount} pendant light{this.state.firstFloorPendantLightCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.firstFloorExteriorGfci ? <li><p contentEditable="true">Supply and install {this.state.firstFloorExteriorGfciCount} exterior GFCI</p></li> : ''}
       {this.state.firstFloorSurfaceLight ? <li><p contentEditable="true">Install {this.state.firstFloorSurfaceLightCount} surface mount light{this.state.firstFloorSurfaceLightCount > 1 ? 's' : ''}</p></li> : ''}
@@ -878,7 +876,7 @@ class App extends Component {
     )
     const secondFloorItems = (<ul>
       {this.state.secondFloorRewire ? <li><p contentEditable="true">Rewire {this.state.secondFloorRewiring}: standard white switches and plugs. </p></li> : ''}
-      {this.state.secondFloorRL ? <li><p contentEditable="true">Supply and install {this.state.secondFloorRLCount} recessed light{this.state.secondFloorRLCount > 1 ? 's' : ''}</p></li> : ''}
+      {this.state.secondFloorRL ? <li><p contentEditable="true">{this.state.ownerSuppliesRecessedLights ? 'I' : 'Supply and i'}nstall {this.state.secondFloorRLCount} recessed light{this.state.secondFloorRLCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.secondFloorSurfaceLight ? <li><p contentEditable="true">Install {this.state.secondFloorSurfaceLightCount} surface mount light{this.state.secondFloorSurfaceLightCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.secondFloorBathFan ? <li><p contentEditable="true">Install power for {this.state.secondFloorBathFanCount} bathroom exhaust fan{this.state.secondFloorBathFanCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.secondFloorCeilingFan ? <li><p contentEditable="true">Install {this.state.secondFloorCeilingFanCount} ceiling fan{this.state.secondFloorCeilingFanCount > 1 ? 's' : ''}</p></li> : ''}
@@ -1092,7 +1090,7 @@ class App extends Component {
     )
     const thirdFloorItems = (<ul>
       {this.state.thirdFloorRewire ? <li><p contentEditable="true">Rewire {this.state.thirdFloorRewiring}: standard white switches and plugs. </p></li> : ''}
-      {this.state.thirdFloorRL ? <li><p contentEditable="true">Supply and install {this.state.thirdFloorRLCount} recessed light{this.state.thirdFloorRLCount > 1 ? 's' : ''}</p></li> : ''}
+      {this.state.thirdFloorRL ? <li><p contentEditable="true">{this.state.ownerSuppliesRecessedLights ? 'I' : 'Supply and i'}nstall {this.state.thirdFloorRLCount} recessed light{this.state.thirdFloorRLCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorSurfaceLight ? <li><p contentEditable="true">Install {this.state.thirdFloorSurfaceLightCount} surface mount light{this.state.thirdFloorSurfaceLightCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorBathFan ? <li><p contentEditable="true">Install power for {this.state.thirdFloorBathFanCount} bathroom exhaust fan{this.state.thirdFloorBathFanCount > 1 ? 's' : ''}</p></li> : ''}
       {this.state.thirdFloorCeilingFan ? <li><p contentEditable="true">Install {this.state.thirdFloorCeilingFanCount} ceiling fan{this.state.thirdFloorCeilingFanCount > 1 ? 's' : ''}</p></li> : ''}
@@ -1144,6 +1142,7 @@ class App extends Component {
           </div>
           <div className="column">
             {/* <form> */}
+            
             <nav className="navbar">
               <div className="navbar-brand">
                 <a className="button is-white is-large" onClick={(e) => {
@@ -1164,6 +1163,17 @@ class App extends Component {
                 }}>Third</a>
               </div>
             </nav>
+            <p>
+            <label className="checkbox">
+              <input
+                name="basement"
+                type="checkbox"
+                value="Basement"
+                checked={this.state.ownerSuppliesRecessedLights}
+                onChange={() => this.setState({ownerSuppliesRecessedLights: !this.state.ownerSuppliesRecessedLights})}
+              />Owner Provides Recessed Lights? 
+              <span class="checkmark"></span>
+            </label></p>
             <div className="columns">
               {renderForm()}
             </div>
